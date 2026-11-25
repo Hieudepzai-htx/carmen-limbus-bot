@@ -2,6 +2,7 @@ import fs from "node:fs";
 
 const APP_ID = "1973530"; // AppID chính thức của Limbus Company
 const DISCORD_WEBHOOK_URL = process.env.DISCORD_WEBHOOK_URL;
+const ROLE_ID = "1564306759814873219"; // Role ID của pm news
 const STATE_FILE = "./last_news.json";
 
 function extractImage(contents, appId) {
@@ -44,6 +45,10 @@ async function postToDiscord(item) {
   const payload = {
     username: "Carmen",
     avatar_url: "https://i.pinimg.com/736x/d6/66/b2/d666b2606bc9785c6c71ddb7d3f6aa2d.jpg",
+    content: `<@&${ROLE_ID}>`,
+    allowed_mentions: {
+      roles: [ROLE_ID],
+    },
     embeds: [
       {
         title: item.title,
